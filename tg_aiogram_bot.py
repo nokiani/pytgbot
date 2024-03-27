@@ -18,7 +18,13 @@ async def handle_start(message: types.Message):
 @dp.message(Command("help"))
 async def handle_help(message: types.Message):
   text = "I'm ECHO bot.\nSend me any message!"
-  await message.answer(text=text)
+  entity_bold = types.MessageEntity(
+    type="bold",
+    offset=len("I'm ECHO bot.\nSend me "),
+    length=3,
+  )
+  entities = [entity_bold]
+  await message.answer(text=text, entities=entities)
 
 @dp.message()
 async def echo_message(message: types.Message):
