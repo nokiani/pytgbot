@@ -5,6 +5,8 @@ from aiogram import Bot
 from aiogram import Dispatcher
 from aiogram import types
 from aiogram.filters import CommandStart, Command
+from aiogram.utils import markdown
+from aiogram.enums import ParseMode
 
 import tg_config
 
@@ -17,14 +19,15 @@ async def handle_start(message: types.Message):
 
 @dp.message(Command("help"))
 async def handle_help(message: types.Message):
-  text = "I'm ECHO bot.\nSend me any message!"
-  entity_bold = types.MessageEntity(
-    type="bold",
-    offset=len("I'm ECHO bot.\nSend me "),
-    length=3,
-  )
-  entities = [entity_bold]
-  await message.answer(text=text, entities=entities)
+  # text = "I'm ECHO bot.\nSend me any message!"
+  # entity_bold = types.MessageEntity(
+  #   type="bold",
+  #   offset=len("I'm ECHO bot.\nSend me "),
+  #   length=3,
+  # )
+  # entities = [entity_bold]
+  text = "I'm ECHO bot\.\nSend me *any* message\!"
+  await message.answer(text=text, parse_mode=ParseMode.MARKDOWN_V2)
 
 @dp.message()
 async def echo_message(message: types.Message):
