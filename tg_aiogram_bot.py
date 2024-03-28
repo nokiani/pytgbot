@@ -31,9 +31,11 @@ async def handle_help(message: types.Message):
     "I'm ECHO bot\.",
     markdown.text(
       "Send me",
-      markdown.bold(
-        markdown.underline("literally"),
-        "any"
+      markdown.markdown_decoration.bold(
+        markdown.text(
+          markdown.underline("literally"),
+          "any"
+        )
       ),
       "message\!"),
     sep="\n",
