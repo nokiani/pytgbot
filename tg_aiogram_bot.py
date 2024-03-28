@@ -10,7 +10,10 @@ from aiogram.enums import ParseMode
 
 import tg_config
 
-bot = Bot(token=tg_config.BOT_TOKEN)
+bot = Bot(
+  token=tg_config.BOT_TOKEN,
+  parse_mode=ParseMode.MARKDOWN_V2,
+  )
 dp = Dispatcher()
 
 @dp.message(CommandStart())
@@ -42,7 +45,10 @@ async def handle_help(message: types.Message):
     ),
     sep="\n",
   )
-  await message.answer(text=text, parse_mode=ParseMode.MARKDOWN_V2)
+  await message.answer(
+    text=text,
+    # parse_mode=ParseMode.MARKDOWN_V2
+  )
 
 @dp.message()
 async def echo_message(message: types.Message):
