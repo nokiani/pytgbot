@@ -50,6 +50,22 @@ async def handle_help(message: types.Message):
     # parse_mode=ParseMode.MARKDOWN_V2
   )
 
+@dp.message(Command("code"))
+async def handle_command_code(message: types.Message):
+  text = markdown.text(
+    "Here's Python code:",
+    "",
+    markdown.markdown_decoration.pre_language(
+      markdown.text(
+        "print('Hello world!')",
+        "def foo():\n  return 'bar'",
+        sep="\n"
+      ),
+      language="python"
+    ),
+  )
+  await message.answer(text=text)
+
 @dp.message()
 async def echo_message(message: types.Message):
   await message.answer(text="Wait a second...")
