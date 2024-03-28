@@ -26,9 +26,8 @@ async def handle_help(message: types.Message):
   #   length=3,
   # )
   # entities = [entity_bold]
-  text = "I'm ECHO bot\.\nSend me *any* message\!"
   text = markdown.text(
-    "I'm ECHO bot\.",
+    markdown.markdown_decoration.quote("I'm ECHO bot."),
     markdown.text(
       "Send me",
       markdown.markdown_decoration.bold(
@@ -37,7 +36,8 @@ async def handle_help(message: types.Message):
           "any"
         )
       ),
-      "message\!"),
+      markdown.markdown_decoration.quote("message!")
+    ),
     sep="\n",
   )
   await message.answer(text=text, parse_mode=ParseMode.MARKDOWN_V2)
