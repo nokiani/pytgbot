@@ -18,9 +18,11 @@ dp = Dispatcher()
 
 @dp.message(CommandStart())
 async def handle_start(message: types.Message):
-  await message.answer(text=f"Hello, {markdown.hbold(message.from_user.full_name)}!",
-                       parse_mode=ParseMode.HTML,
-                      )
+  url = "https://w7.pngwing.com/pngs/332/245/png-transparent-robot-waving-hand-bot-robot-thumbnail.png"
+  await message.answer(
+    text=f"{markdown.hide_link(url)}Hello, {markdown.hbold(message.from_user.full_name)}!",
+    parse_mode=ParseMode.HTML,
+  )
 
 @dp.message(Command("help"))
 async def handle_help(message: types.Message):
