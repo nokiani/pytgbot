@@ -27,6 +27,15 @@ async def handle_help(message: types.Message):
   # )
   # entities = [entity_bold]
   text = "I'm ECHO bot\.\nSend me *any* message\!"
+  text = markdown.text(
+    "I'm ECHO bot\.",
+    markdown.text(
+      "Send me",
+      markdown.underline("literally"),
+      markdown.bold("any"),
+      "message\!"),
+    sep="\n",
+  )
   await message.answer(text=text, parse_mode=ParseMode.MARKDOWN_V2)
 
 @dp.message()
