@@ -63,12 +63,25 @@ async def handle_command_code(message: types.Message):
       ),
       language="python"
     ),
+    "Here's JS code:",
+    "",
+    markdown.markdown_decoration.pre_language(
+      markdown.text(
+        "console.log('Hello world!')",
+        "function foo() {\n  return 'bar'\n}",
+        sep="\n"
+      ),
+      language="javascript"
+    ),
   )
   await message.answer(text=text)
 
 @dp.message()
 async def echo_message(message: types.Message):
-  await message.answer(text="Wait a second...")
+  await message.answer(
+    text="Wait a second...",
+    parse_mode=None,
+  )
 
   try:
     await message.send_copy(chat_id=message.chat.id)
