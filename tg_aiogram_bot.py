@@ -81,7 +81,11 @@ async def handle_command_code(message: types.Message):
 
 @dp.message(F.photo, ~F.caption) # делаем инверсию знаком тильды. Делаем условие, если caption будет пустым
 async def handle_photo_wo_caption(message: types.Message):
-  await message.reply("I cannot see, sorry. Could you describe it please?")
+  caption = "I cannot see, sorry. Could you describe it please?"
+  await message.reply_photo(
+    photo=message.photo[-1].file_id,
+    caption=caption,
+    )
 
 @dp.message(F.photo, F.caption.contains("please"))
 async def handle_photo_w_please_caption(message: types.Message):
