@@ -52,7 +52,7 @@ async def handle_help(message: types.Message):
     # parse_mode=ParseMode.MARKDOWN_V2
   )
 
-@dp.message(Command("code"))
+@dp.message(Command("code", prefix="/!%"))
 async def handle_command_code(message: types.Message):
   text = markdown.text(
     "Here's Python code:",
@@ -86,8 +86,8 @@ async def echo_message(message: types.Message):
   )
 
   try:
-    await message.forward(chat_id=message.chat.id)
-    # await message.copy_to(chat_id=message.chat.id)
+    # await message.forward(chat_id=message.chat.id)
+    await message.copy_to(chat_id=message.chat.id)
     # await message.send_copy(chat_id=message.chat.id)
   except TypeError:
     await message.reply(text="Oh! Something new :)")
