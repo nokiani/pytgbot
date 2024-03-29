@@ -1,6 +1,7 @@
 import asyncio
 import logging
 
+from re import Match
 from aiogram import Bot, F
 from aiogram import Dispatcher
 from aiogram import types
@@ -97,6 +98,12 @@ async def handle_any_media_w_caption(message: types.Message):
 @dp.message(F.from_user.id.in_({42, 111}), F.text == "secret")
 async def secret_admin_message(message: types.Message):
   await message.reply("Hi, admin!")
+
+@dp.message(F.text.regexp(r"^(\d+)$").as_("code"))
+async def handle_code(message: types.Message, code: Match[str]):
+  await message.reply(f"Your code: {code.group()}")
+
+
 
 @dp.message()
 async def echo_message(message: types.Message):
