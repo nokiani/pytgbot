@@ -27,13 +27,6 @@ async def handle_start(message: types.Message):
 
 @dp.message(Command("help"))
 async def handle_help(message: types.Message):
-  # text = "I'm ECHO bot.\nSend me any message!"
-  # entity_bold = types.MessageEntity(
-  #   type="bold",
-  #   offset=len("I'm ECHO bot.\nSend me "),
-  #   length=3,
-  # )
-  # entities = [entity_bold]
   text = markdown.text(
     markdown.markdown_decoration.quote("I'm ECHO bot."),
     markdown.text(
@@ -91,6 +84,16 @@ async def handle_photo_wo_caption(message: types.Message):
 async def handle_photo_w_please_caption(message: types.Message):
   await message.reply("Do not beg me! I cannot see, sorry.")
 
+any_media_filter = F.photo | F.video | F.document
+
+@dp.message(any_media_filter, ~F.caption)
+async def handle_any_media_wo_caption(message: types.Message):
+  await message.reply("I cannot see!")
+
+@dp.message(any_media_filter, F.caption)
+async def handle_any_media_w_caption(message: types.Message):
+  await message.reply(f"I can see smth is on media! It is: {message.caption!r}")
+
 @dp.message()
 async def echo_message(message: types.Message):
   await message.answer(
@@ -99,9 +102,7 @@ async def echo_message(message: types.Message):
   )
 
   try:
-    # await message.forward(chat_id=message.chat.id)
     await message.copy_to(chat_id=message.chat.id)
-    # await message.send_copy(chat_id=message.chat.id)
   except TypeError:
     await message.reply(text="Oh! Something new :)")
 
