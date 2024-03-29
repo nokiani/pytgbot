@@ -1,7 +1,7 @@
 import asyncio
 import logging
 
-from aiogram import Bot
+from aiogram import Bot, F
 from aiogram import Dispatcher
 from aiogram import types
 from aiogram.filters import CommandStart, Command
@@ -83,7 +83,7 @@ async def handle_command_code(message: types.Message):
   )
 
 
-@dp.message(lambda message: message.photo)
+@dp.message(F.photo)
 async def handle_photo(message: types.Message):
   await message.reply("I cannot see, sorry. Could you describe it please?")
 
