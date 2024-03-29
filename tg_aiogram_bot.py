@@ -79,6 +79,14 @@ async def handle_command_code(message: types.Message):
   )
 
 
+@dp.message(Command("pic"))
+async def handle_command_pic(message: types.Message):
+  url = "https://habrastorage.org/getpro/habr/upload_files/544/243/e5a/544243e5a3f499a48b5226a71b95636f.png"
+  await message.reply_photo(
+    photo=url,
+    caption="from Habr",
+  )
+
 @dp.message(F.photo, ~F.caption) # делаем инверсию знаком тильды. Делаем условие, если caption будет пустым
 async def handle_photo_wo_caption(message: types.Message):
   caption = "I cannot see, sorry. Could you describe it please?"
