@@ -2,6 +2,8 @@ import asyncio
 import logging
 
 from re import Match
+from magic_filter import RegexpMode
+
 from aiogram import Bot, F
 from aiogram import Dispatcher
 from aiogram import types
@@ -99,7 +101,7 @@ async def handle_any_media_w_caption(message: types.Message):
 async def secret_admin_message(message: types.Message):
   await message.reply("Hi, admin!")
 
-@dp.message(F.text.regexp(r"^(\d+)$").as_("code"))
+@dp.message(F.text.regexp(r"(\d+)", mode=RegexpMode.SEARCH).as_("code"))
 async def handle_code(message: types.Message, code: Match[str]):
   await message.reply(f"Your code: {code.group()}")
 
