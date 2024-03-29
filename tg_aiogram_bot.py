@@ -94,6 +94,10 @@ async def handle_any_media_wo_caption(message: types.Message):
 async def handle_any_media_w_caption(message: types.Message):
   await message.reply(f"I can see smth is on media! It is: {message.caption!r}")
 
+@dp.message(F.from_user.id.in_({42, 111}), F.text == "secret")
+async def secret_admin_message(message: types.Message):
+  await message.reply("Hi, admin!")
+
 @dp.message()
 async def echo_message(message: types.Message):
   await message.answer(
