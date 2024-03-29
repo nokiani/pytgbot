@@ -95,7 +95,16 @@ any_media_filter = F.photo | F.video | F.document
 
 @dp.message(any_media_filter, ~F.caption)
 async def handle_any_media_wo_caption(message: types.Message):
-  await message.reply("I cannot see!")
+  if message.document:
+    await message.reply_document(
+      document=message.document.file_id,
+    )
+  elif message.video:
+    await message.reply_video(
+      video=message.video.file_id,
+    )
+  else:
+    await message.reply("I cannot see!")
 
 @dp.message(any_media_filter, F.caption)
 async def handle_any_media_w_caption(message: types.Message):
