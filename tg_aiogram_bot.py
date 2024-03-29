@@ -87,6 +87,10 @@ async def handle_command_code(message: types.Message):
 async def handle_photo_wo_caption(message: types.Message):
   await message.reply("I cannot see, sorry. Could you describe it please?")
 
+@dp.message(F.photo, F.caption.contains("please"))
+async def handle_photo_w_please_caption(message: types.Message):
+  await message.reply("Do not beg me! I cannot see, sorry.")
+
 @dp.message()
 async def echo_message(message: types.Message):
   await message.answer(
