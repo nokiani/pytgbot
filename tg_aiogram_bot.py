@@ -8,10 +8,10 @@ from aiogram.filters import CommandStart, Command
 from aiogram.utils import markdown
 from aiogram.enums import ParseMode
 
-import tg_config
+from tg_config import settings
 
 bot = Bot(
-  token=tg_config.BOT_TOKEN,
+  token=settings.bot_token,
   parse_mode=ParseMode.MARKDOWN_V2,
   )
 dp = Dispatcher()
@@ -86,7 +86,8 @@ async def echo_message(message: types.Message):
   )
 
   try:
-    await message.send_copy(chat_id=message.chat.id)
+    await message.copy_to(chat_id=message.chat.id)
+    # await message.send_copy(chat_id=message.chat.id)
   except TypeError:
     await message.reply(text="Oh! Something new :)")
 
