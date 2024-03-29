@@ -12,7 +12,8 @@ from tg_config import settings
 
 bot = Bot(
   token=settings.bot_token,
-  parse_mode=ParseMode.MARKDOWN_V2,
+  # parse_mode=ParseMode.MARKDOWN_V2,
+  parse_mode=ParseMode.HTML,
   )
 dp = Dispatcher()
 
@@ -49,7 +50,7 @@ async def handle_help(message: types.Message):
   )
   await message.answer(
     text=text,
-    # parse_mode=ParseMode.MARKDOWN_V2
+    parse_mode=ParseMode.MARKDOWN_V2
   )
 
 @dp.message(Command("code", prefix="/!%"))
@@ -76,7 +77,15 @@ async def handle_command_code(message: types.Message):
       language="javascript"
     ),
   )
-  await message.answer(text=text)
+  await message.answer(
+    text=text,
+    parse_mode=ParseMode.MARKDOWN_V2
+  )
+
+
+@dp.message(lambda message: message.photo)
+async def handle_photo(message: types.Message):
+  await message.reply("I cannot see, sorry. Could you describe it please?")
 
 @dp.message()
 async def echo_message(message: types.Message):
