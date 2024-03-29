@@ -101,9 +101,9 @@ async def handle_any_media_w_caption(message: types.Message):
 async def secret_admin_message(message: types.Message):
   await message.reply("Hi, admin!")
 
-@dp.message(F.text.regexp(r"(\d+)", mode=RegexpMode.SEARCH).as_("code"))
-async def handle_code(message: types.Message, code: Match[str]):
-  await message.reply(f"Your code: {code.group()}")
+@dp.message(F.text.regexp(r"(\d+)", mode=RegexpMode.FINDALL).as_("code"))
+async def handle_code(message: types.Message, code: list[str]):
+  await message.reply(f"Your code: {code}")
 
 
 
